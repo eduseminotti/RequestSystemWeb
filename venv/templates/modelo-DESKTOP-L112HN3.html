@@ -21,30 +21,21 @@
 
     <SCRIPT language=JavaScript>
 
-        var segundos = new Number();
+        var g_iCountS = new Number();
         var g_iCountM = new Number();
 
         // de 30 a 0 //
-        var segundos = 60;
-        var minutos = 0;
+        var g_iCountS = 5;
+        var g_iCountM = 1;
 
         function startCountdown() {
-            if ((segundos - 1) >= 0 && minutos >= 0) {
-                segundos = segundos - 1;
-
-                if (segundos == 0 && minutos != 0) {
-                    segundos = 10;
-                    minutos = minutos - 1;
+            if ((g_iCountS - 1) >= 0  && g_iCountM >=0) {
+                g_iCountS = g_iCountS - 1;
+                if (g_iCountS == 0){
+                    g_iCountM = g_iCountM -1;
+                    g_iCountS = 5;
                 }
-
-                if (segundos == 0 && minutos == 0) {
-
-                    setTimeout(function () {
-                        location.reload()
-                    }, 100);
-                }
-
-                numberCountdown.innerText = minutos + ':' + segundos;
+                numberCountdown.innerText = g_iCountM +':' + g_iCountS;
                 setTimeout('startCountdown()', 1000);
             }
         }
@@ -67,7 +58,6 @@
                     <nav class="classy-navbar justify-content-between" id="nikkiNav">
 
                         <!-- Nav brand -->
-
                         <a href="{{ url_for('home.index') }}" class="nav-brand"><img
                                 src="{{ url_for('static', filename='img/core-img/logo.png') }}" alt=""></a>
 
@@ -112,7 +102,7 @@
                                     Usuario: <b>{{ session['user'] }}</b>
                                     <B>
                                         <DIV id=numberCountdown align=center></DIV>
-
+                                    
                                     </B>
 
                                     <!--  <a href="#" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i
@@ -130,6 +120,10 @@
                                 </div>
 
                             </div>
+
+
+
+
                             {% endif %}
                             <!-- Nav End -->
                         </div>

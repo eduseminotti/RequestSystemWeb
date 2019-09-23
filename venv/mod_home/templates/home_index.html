@@ -4,5 +4,13 @@
 {% block content %}
 <h1>Home</h1>
 <p class="important">HOME - INDEX</p>
-{% endblock %}
 
+
+<form action="{{ url_for('home.resultado') }}" method="post">
+    <label for="nome">Nome</label>
+    <input type="text" name="nome" id="nome" placeholder="Informe seu nome">
+    <label for="idade">Idade</label>
+    <input type="text" name="idade" id="idade" placeholder="Informe sua idade">
+    <button type="submit" class="btn btn-primary">Enviar</button>
+</form>
+{% endblock %}

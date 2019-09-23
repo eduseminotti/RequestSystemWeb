@@ -2,12 +2,70 @@
 {% block title %}Pedidos{% endblock %}
 {% block content %}
 
-<div class="row">
-    <div class="col-4">
+<div class="container">
+    <form method="post">
+        <h2><button style="width: 160px" type="button" class="btn btn-primary" 
+            onclick="window.location.href='/pedidos/pedidos_new'">+ Novo
+            pedido</button></h2>
+    </form>
+
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h2>Listagem de Pedidos</h2>
+                    <hr />
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Telefone</th>
+                                <th>Cliente</th>
+                                <th>Endereço</th>
+                                <th>Numero</th>
+                                <th>Bairro</th>
+                                <th>Cidade</th>
+                                <th>OBS</th>
+                                <th>Data/Hora</th>
+                                <th>Produtos</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>4999999999</td>
+                                <td>Zé das Bulacha</td>
+                                <td>Rua do Zé</td>
+                                <td>560</td>
+                                <td>Universitario</td>
+                                <td>Lages</td>
+                                <td>SC</td>
+                                <td>09-09-2019 / 09:09</td>
+                                <td>Pizza Grande Calabresa</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-4">
-        <h1>Pedidos</h1>
-       
+    <div class="row">
+        <div class="col-md-12">
+            <div class="btn-toolbar justify-content-end" role="toolbar" aria-label="Toolbar with button groups">
+                <div class="btn-group" role="group" aria-label="First group">
+                    <button type="button" class="btn btn-primary">1</button>
+                    <button type="button" class="btn btn-primary">2</button>
+                </div>
+                <div class="btn-group" role="group" aria-label="Second group">
+                    <button type="button" class="btn btn-primary">5</button>
+                    <button type="button" class="btn btn-primary">6</button>
+                    <button type="button" class="btn btn-primary">7</button>
+                </div>
+                <div class="btn-group" role="group" aria-label="Third group">
+                    <button type="button" class="btn btn-primary">8</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
