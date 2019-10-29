@@ -1,0 +1,60 @@
+{% extends "modelo.html" %}
+{% block title %}Edição de Usuário{% endblock %}
+{% block content %}
+
+<div class="container">
+    <br>
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <form action="{{ url_for('usuarios.UpdateUser') }}" name="usuario" method="POST">
+                <h2>Cadastro de Usuários</h2>
+                <hr>
+                <div class="form-row">
+
+                    {% for row in result %}
+                    <div >
+                            <label ty for="Nome"></label>
+                            <input type="hidden" value="{{ row[0] }}" class="form-control" name="id" id="Nome"
+                                placeholder="Nome">
+                        </div>
+                    <div class="form-group col-md-4">
+                        <label for="Nome">Nome</label>
+                        <input type="text" value="{{ row[1] }}" class="form-control" name="Nome" id="Nome"
+                            placeholder="Nome">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="Setor">Setor</label>
+                        <input type="nutextmber" value="{{ row[2] }}" class="form-control" id="Setor" name="Setor"
+                            placeholder="Setor">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="UserName">UserName</label>
+                        <input type="text" class="form-control" value="{{ row[3] }}" id="UserName" name="UserName"
+                            autocomplete="off" placeholder="UserName">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="Password">Senha</label>
+                        <input type="Password" class="form-control" value="{{ row[4] }}" name="Password" id="Password"
+                            autocomplete="off" placeholder="">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="PasswordRepeate">Repita a Senha</label>
+                        <input type="Password" class="form-control" value="{{ row[4] }}" id="PasswordRepeate"
+                            autocomplete="off" placeholder="">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="Type">Tipo do Usuário</label>
+                        <input type="number" value="{{ row[5] }}"class="form-control" name="Type" autocomplete="off" placeholder="">
+                    </div>
+                    {% endfor %}
+
+                </div>
+
+                <button type="submit" name="SalvaNovoUsuario" id="SalvaNovoUsuario"
+                    class="btn btn-primary">Gravar</button>
+
+            </form>
+        </div>
+    </div>
+
+    {% endblock %}

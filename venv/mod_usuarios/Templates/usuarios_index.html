@@ -2,70 +2,69 @@
 {% block title %}Usuarios{% endblock %}
 {% block content %}
 
+<script>
+    function confirmExclusao() {
+        if (confirm("Tem certeza que deseja excluir?")) {
+            location.href = "deletar_categoria.jsp?acao=deletar";
+        }
+    }
+</script>
 <div class="container">
-    <form method="post">
-        <h2><button style="width: 160px" type="button" class="btn btn-primary"
-                onclick="window.location.href='/usuarios/usuarios_new'">+ Novo
-                Usuario</button></h2>
-    </form>
-
+    <br>
+    <div class="row">
+        <div class="col-md-4">
+            <form>
+                <h2><button style="width: 160px" type="button" class="btn btn-primary"
+                        onclick="window.location.href='/usuarios/newuser'">Novo Usuario</button>
+            </form>
+        </div>
+    </div>
+    <hr>
     <div class="row">
         <div class="col-md-12 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <h2>Listagem de Usuáios</h2>
-                    <hr />
+                    <h2>Listagem de Usuários</h2>
                     <table class="table">
                         <thead>
                             <tr>
                                 <th>#</th>
                                 <th>Nome</th>
-                                <th>Email</th>
-                                <th>CPF</th>
-                                <th>Telefone</th>
                                 <th>Setor</th>
+                                <th>Username</th>
+                                <th>Password</th>
                                 <th>Tipo</th>
+                                <th>Editar</th>
+                                <th>Excluir</th>
                             </tr>
                         </thead>
                         <tbody>
+                            {% if result %}
+                            {% for row in result %}
                             <tr>
-                                <td>1</td>
-                                <td>Ze</td>
-                                <td>email@email.com</td>
-                                <td>cpf do Zé</td>
-                                <td>telefone do ze</td>
-                                <td>setor do Ze</td>
-                                <td>tipo de acesso do ze</td>
+                                <th> {{ row[0] }}</th>
+                                <td> {{ row[1] }}</td>
+                                <td> {{ row[2] }}</td>
+                                <td> {{ row[3] }}</td>
+                                <td> {{ row[4] }}</td>
+                                <td> {{ row[5] }}</td>
+                                <td>
+                                    <form action="{{ url_for('usuarios.edituser') }}" method="POST" name='edituser'>
+                                        <input type='hidden' name='id' value='{{ row[0] }}'>
+                                        <button class="btn btn-toolbar" type='submit' name='edituser'>Editar</button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form method="POST" name='deleteuser'>
+                                        <input type='hidden' name='id' value='{{ row[0] }}'>
+                                        <button class="btn btn-toolbar" type='submit' onclick="confirmExclusao" name='deleteuser'>Excluir 2</button>
+                                    </form>
+                                </td>
                             </tr>
-                            <tr>
-                                    <td>2</td>
-                                    <td>Ze</td>
-                                    <td>email@email.com</td>
-                                    <td>cpf do Zé</td>
-                                    <td>telefone do ze</td>
-                                    <td>setor do Ze</td>
-                                    <td>tipo de acesso do ze</td>
-                                </tr>
+                            {% endfor %}
+                            {% endif %}
                         </tbody>
                     </table>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="btn-toolbar justify-content-end" role="toolbar" aria-label="Toolbar with button groups">
-                <div class="btn-group" role="group" aria-label="First group">
-                    <button type="button" class="btn btn-primary">1</button>
-                    <button type="button" class="btn btn-primary">2</button>
-                </div>
-                <div class="btn-group" role="group" aria-label="Second group">
-                    <button type="button" class="btn btn-primary">5</button>
-                    <button type="button" class="btn btn-primary">6</button>
-                    <button type="button" class="btn btn-primary">7</button>
-                </div>
-                <div class="btn-group" role="group" aria-label="Third group">
-                    <button type="button" class="btn btn-primary">8</button>
                 </div>
             </div>
         </div>
