@@ -1,0 +1,39 @@
+{% extends "modelo.html" %}
+{% block title %}Produtos{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <form action="{{ url_for('produtos.UpdateProduto') }}" name="Clientes" method="POST" style="margin-top: 5%" enctype="multipart/form-data">
+        <h2>Edição de Produtos</h2>
+        <div class="form-row">
+            {%for row in produtos%}
+            <div class="form-group col-md-4">
+                <input hidden value="{{row[0]}}" type="text" class="form-control" name="id">
+                <label for="Nome do produto">Nome do Produto</label>
+                <input value="{{row[1]}}" type="text" class="form-control" name="nome" placeholder="Nome do produto">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="Tipo de Unidade">Tipo de Unidade</label>
+                <input value="{{row[2]}}" type="text" class="form-control" id="unidade" name="unidade"
+                    placeholder="Tipo de Unidade">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="">Quantidade em Estoque</label>
+                <input value="{{row[3]}}" type="number" class="form-control" name="quantidade" id="quantidade"
+                    placeholder="">
+            </div>
+            <div class="form-group col-md-12">
+                <label for="imagem">Imagem:</label>
+                <input type="file" name="imagem" accept="image/*" id="imagem">
+            </div>
+           
+            <a href="#"><img src=" {{row[4]}}" alt="" width="150PX" height="150PX"></a>
+            {%endfor%}
+        </div>
+        <button type="submit" class="btn btn-primary">Gravar</button>
+    </form>
+</div>
+
+{% endblock %}

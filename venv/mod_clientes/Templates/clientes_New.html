@@ -4,20 +4,32 @@
 
 <div class="container">
    
-    <form style="margin-top: 5%">
+    <form action="{{ url_for('clientes.AddClient') }}" name="Clientes" method="POST" style="margin-top: 5%">
             <h2>Cadastro de Clientes</h2>
         <div class="form-row">
             <div class="form-group col-md-4">
-                <label for="Nome do produto">Nome do Produto</label>
-                <input type="text" class="form-control" placeholder="Nome do produto">
+                <label for="Nome do produto">Nome</label>
+                <input type="text" name="Nome" class="form-control" >
             </div>
             <div class="form-group col-md-4">
-                <label for="Tipo de Unidade">Tipo de Unidade</label>
-                <input type="text" class="form-control" id="Unidade" placeholder="Tipo de Unidade">
+                <label for="Tipo de Unidade">Endereço</label>
+                <input type="text" name="Endereco" class="form-control" id="Endereco" >
             </div>
             <div class="form-group col-md-4">
-                <label for="">Quantidade em Estoque</label>
-                <input type="number" class="form-control" id="quantidade" placeholder="">
+                <label for="">email</label>
+                <input type="email" name="Email" class="form-control" id="Email" placeholder="">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="Tipo de Unidade">Login</label>
+                <input type="text" name="Login" class="form-control" id="Login">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="Tipo de Unidade">Senha</label>
+                <input type="password" name="Senha" class="form-control" id="Senha" >
+            </div>
+            <div class="form-group col-md-4">
+                <label for="Tipo de Unidade">Grupo</label>
+                <input type="text" name="Grupo"class="form-control" id="Grupo" >
             </div>
         </div>
         <button  type="submit" class="btn btn-primary">Cadastrar</button>

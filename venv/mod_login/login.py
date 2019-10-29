@@ -1,10 +1,10 @@
 #coding: utf-8
 from flask import Blueprint, render_template, request, session, redirect , url_for
+from ValidaUserDB import ValidaUser
 from functools import wraps
+import pymssql  
 
 bp_login = Blueprint('login', __name__, url_prefix='/', template_folder='templates')
-
-
 
 @bp_login.route("/") 
 def index():
@@ -15,10 +15,25 @@ def btnlogin():
      user =  request.form.get('user')
      password = request.form.get('pass')
 
+     ValidaUserBanco = ValidaUser()
+     userBanco = ValidaUserBanco.validaUsuario( user , password )
+
+     id=0
+     userNameDB=""
+     passwordDB=""
+     tipo=0
+
+     for row in userBanco:
+          id = row[0]     
+          userNameDB = row[1]
+          passwordDB = row[2]
+          grupo = row[3]
+
      #Usuario correto
-     if user == "user1" and password == "123":
+     if user == userNameDB and password == passwordDB:
           session.clear()
           session['user'] = user
+          session['grupo'] = grupo
           return redirect(url_for('home.index'))
      #user errado
      else:     
