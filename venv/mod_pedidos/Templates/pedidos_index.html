@@ -8,13 +8,13 @@
         debugger
         if (confirm("Tem certeza que deseja excluir?")) {
             debugger
-           return true;
+            return true;
         }
     }
 </script>
 <br>
 <div class="container">
-   <form method="post">
+    <form method="post">
         <h2><button style="width: 160px" type="button" class="btn btn-primary"
                 onclick="window.location.href='/pedidos/NovoPedido'">Novo
                 Pedido</button></h2>
@@ -32,9 +32,10 @@
                                 <th>Codigo</th>
                                 <th>Cliente Solicitante</th>
                                 <th>Quantidade de itens</th>
-                                <th>Data da solicitação</th> 
-                                <th>Editar</th> 
-                                <th>Excluir</th> 
+                                <th>Data da solicitação</th>
+                                <th>Editar</th>
+                                <th>Excluir</th>
+                                <th>Ver</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -48,14 +49,20 @@
 
                                 <td>
                                     <form action="{{ url_for('pedidos.editPedido') }}" method="POST">
-                                        <input  type='hidden' name='id' value='{{ row[0] }}'>
-                                        <button class="btn btn-toolbar"   type='submit' name='deleteuser'>Editar</button>
+                                        <input type='hidden' name='id' value='{{ row[0] }}'>
+                                        <button class="btn btn-toolbar" type='submit' name='deleteuser'>Editar</button>
                                     </form>
                                 </td>
                                 <td>
                                     <form action="{{ url_for('pedidos.DeletePedido') }}" method="POST">
-                                        <input  type='hidden' name='id' value='{{ row[0] }}'>
-                                        <button class="btn btn-toolbar"   type='submit' name='deleteuser'>Excluir</button>
+                                        <input type='hidden' name='id' value='{{ row[0] }}'>
+                                        <button class="btn btn-toolbar" type='submit' name='deleteuser'>Excluir</button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="{{ url_for('pedidos.Verpedido') }}" method="POST">
+                                        <input type='hidden' name='id' value='{{ row[0] }}'>
+                                        <button class="btn btn-toolbar" type='submit' name='VerPedido'>Ver</button>
                                     </form>
                                 </td>
                             </tr>

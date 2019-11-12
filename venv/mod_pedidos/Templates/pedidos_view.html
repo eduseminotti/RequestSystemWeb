@@ -1,0 +1,61 @@
+{% extends "modelo.html" %}
+{% block title %}Clientes{% endblock %}
+{% block content %}
+<div class="container">
+    <form action="{{ url_for('pedidos.pdfpedido') }}" method="POST" style="margin-top: 5%">
+        <h2>Detalhes do Pedido</h2>
+        <button class="btn btn-toolbar" type='submit' name='VerPedido'>Ver</button>
+
+        <h2><button style="width: 160px" type="button" class="btn btn-primary"
+                onclick="window.location.href='/pedidos/pdfpedido'">PDF Pedido</button></h2>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="Cliente">Codigo do Pedido</label>
+                <input disabled value="{{ IdPedido }}" type="text" name="IdPedido" id="IdPedido" class="form-control">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="Cliente">Cliente</label>
+                <input disabled value="{{ cliente }}" type="text" name="IdPedido" id="IdPedido" class="form-control">
+
+
+            </div>
+        </div>
+    </form>
+
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h2>Produdos Do Pedido</h2>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Imagem</th>
+                                <th>Nome</th>
+                                <th>Unidade</th>
+                                <th>Quantidade</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if prodPedidos %}
+                            {% for row in prodPedidos %}
+                            <form action="{{ url_for('pedidos.removeproduto') }}" method="POST">
+                                <tr>
+                                    <th> <img src=" {{row[1]}}" alt="" width="100PX" height="100PX"></th>
+                                    <td> {{ row[2] }}</td>
+                                    <td> {{ row[3] }}</td>
+                                    <td> {{ row[4] }} <input value="{{ row[4] }}" type="hidden" name="quantidade"
+                                            id="quantidade"> </td>
+
+                                </tr>
+                            </form>
+                            {% endfor %}
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

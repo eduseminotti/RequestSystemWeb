@@ -41,16 +41,22 @@ class Pedidos(object):
         except:
             return "ERRO"
 
-    def selectPedido(self):
+    def selectclientePedido(self):
         banco = Banco()
         try:
             c = banco.conexao.cursor()
-            c.execute("select max(id) from pedidos")
+            c.execute("select cliente = (select nome from tb_clientes where id = Pedidos.clientId) "+
+                      "from pedidos where id = %s", (self.id))
+
             result = c.fetchall()
             banco.conexao.commit()
+
+            for row in result:
+                self.Cliente = row[0]
+
             c.close()
 
-            return result
+            return self.Cliente
         except:
             return "ERRO"
 

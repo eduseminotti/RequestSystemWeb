@@ -13,6 +13,10 @@
                 <label for="Cliente">Codigo do Pedido</label>
                 <input disabled value="{{ IdPedido }}" type="text" name="IdPedido" id="IdPedido" class="form-control">
             </div>
+            <div class="form-group col-md-6">
+                <label for="Cliente">Cliente</label>
+                <input disabled value="{{ cliente }}" type="text" name="IdPedido" id="IdPedido" class="form-control">
+            </div>
         </div>
     </form>
 
@@ -81,7 +85,7 @@
                                     <th> <img src=" {{row[1]}}" alt="" width="100PX" height="100PX"></th>
                                     <td> {{ row[2] }}</td>
                                     <td> {{ row[3] }}</td>
-                                    <td> {{ row[4] }}</td>
+                                    <td> {{ row[4] }}   <input value="{{ row[4] }}" type="hidden" name="quantidade" id="quantidade"> </td>
                                     <td>
                                         <input type='hidden' value="{{ IdPedido }}" name="IdPedido" id="IdPedido">
                                         <input type='hidden' name='idProduto' value='{{ row[0] }}'>

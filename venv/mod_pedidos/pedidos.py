@@ -4,6 +4,8 @@ from mod_login.login import validaSessao
 from PedidosDb import Pedidos
 from ProdutosDB import Produtos
 
+import pdfkit
+
 bp_pedidos = Blueprint('pedidos', __name__,
                        url_prefix='/pedidos', template_folder='templates')
 
@@ -45,10 +47,11 @@ def pedidosEdit(id):
     else:
         pedidos.id = id
 
+    cliente = pedidos.selectclientePedido()
     proddisponiveis = pedidos.selectProdutosForPedido(pedidos.id)
     prodpedidos= pedidos.selectProdutosDoPedido(pedidos.id)
 
-    return render_template('pedidos_edit.html', prodDisponiveis=proddisponiveis, IdPedido=pedidos.id,
+    return render_template('pedidos_edit.html', prodDisponiveis=proddisponiveis, cliente=cliente, IdPedido=pedidos.id,
                            prodPedidos=prodpedidos)
 
 
@@ -71,12 +74,14 @@ def DeletePedido():
 def incluiProduto():
 
     pedidos = Pedidos()
+    produtos = Produtos()
 
     pedidos.id = request.form['IdPedido']
     pedidos.produtoId = request.form['idProduto']
     pedidos.quantidade = request.form['quantidade']
 
     pedidos.IncluiProdutoPedido()
+    produtos.diminuiitensestoque(pedidos.produtoId, pedidos.quantidade)
 
     return pedidosEdit(pedidos.id)
 
@@ -86,10 +91,32 @@ def incluiProduto():
 def removeproduto():
 
     pedidos = Pedidos()
+    produtos = Produtos()
 
     pedidos.id = request.form['IdPedido']
     pedidos.produtoId = request.form['idProduto']
+    pedidos.quantidade = request.form['quantidade']
 
     pedidos.deletaProdutoPedido()
+    produtos.aumentaitensestoque(pedidos.produtoId, pedidos.quantidade)
 
     return pedidosEdit(pedidos.id)
+
+@bp_pedidos.route('/Verpedido', methods=['POST'])
+def Verpedido():
+
+    pedidos = Pedidos()
+
+    pedidos.id = request.form['id']
+
+    cliente = pedidos.selectclientePedido()
+    prodpedidos = pedidos.selectProdutosDoPedido(pedidos.id)
+
+    return render_template('pedidos_view.html',  cliente=cliente, IdPedido=pedidos.id,
+                           prodPedidos=prodpedidos)
+
+
+@bp_pedidos.route('/pdfpedido')
+def pdfpedido():
+
+    pdfkit.from_file('test.html', 'out.pdf')

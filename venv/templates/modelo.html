@@ -25,6 +25,7 @@
     </SCRIPT>
 
 
+
 </head>
 
 <body onload=startCountdown()>
@@ -51,13 +52,10 @@
 
                         <!-- Menu -->
                         <div class="classy-menu">
-
-
                             <!-- close btn -->
                             <div class="classycloseIcon">
                                 <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
                             </div>
-
                             {% if 'user' in session %}
                             <!-- Nav Start -->
                             <div class="classynav">
@@ -67,8 +65,6 @@
                                     <li><a href="{{ url_for('produtos.index') }}">Produtos</a></li>
                                     <li><a href="{{ url_for('login.btnlogout') }}">sair </a></li>
                                 </ul>
-
-
                                 <div class="search-form" ; hidden=true>
                                     <form action="#" method="get">
                                         <input type="search" name="search" class="form-control"
@@ -76,15 +72,11 @@
                                         <button type="submit"><i class="fa fa-search"></i></button>
                                     </form>
                                 </div>
-
                                 <!-- Social Button -->
                                 <div class="top-social-info">
-
                                     Usuario: <b>{{ session['user'] }}</b>
                                     <br>Grupo: <b>{{ session['grupo'] }}</b>
-                                
                                 </div>
-
                             </div>
                             {% endif %}
                             <!-- Nav End -->
@@ -95,10 +87,7 @@
         </div>
     </header>
     <!-- ##### Header Area End ##### -->
-
     {% block content %}{% endblock %}
-
-
     {% block footer %}
     <!--
     <footer class="footer-area">
