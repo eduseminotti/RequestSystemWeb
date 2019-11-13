@@ -1,0 +1,105 @@
+{% extends "modelo.html" %}
+{% block title %}Clientes{% endblock %}
+{% block content %}
+<script>
+
+</script>
+<div class="container">
+
+    <form style="margin-top: 5%">
+        <h2>Detalhes do Pedido</h2>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="Cliente">Codigo do Pedido</label>
+                <input disabled value="{{ IdPedido }}" type="text" name="IdPedido" id="IdPedido" class="form-control">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="Cliente">Cliente</label>
+                <input disabled value="{{ cliente }}" type="text" name="IdPedido" id="IdPedido" class="form-control">
+            </div>
+        </div>
+    </form>
+
+    <div class="row">
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h2>Produdos Disponiveis</h2>
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>Imagem</th>
+                                <th>Nome</th>
+                                <th>Unidade</th>
+                                <th>QTD em Estoque</th>
+                                <th>Quantidade</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if prodDisponiveis %}
+                            {% for row in prodDisponiveis %}
+
+                            <form action="{{ url_for('pedidos.incluiProduto') }}" method="POST">
+                                <tr>
+
+                                    <td>{{ row[0] }}</td>
+                                    <th> <img src=" {{row[4]}}" alt="" width="100PX" height="100PX"></th>
+                                    <td> {{ row[1] }}</td>
+                                    <td> {{ row[2] }}</td>
+                                    <td> {{ row[3] }}</td>
+                                    <td> <input value="0" type="number" name="quantidade" id="quantidade" min="0" class="form-control"></td>
+                                    <td>
+                                        <input type='hidden' value="{{ IdPedido }}" name="IdPedido" id="IdPedido">
+                                        <input type='hidden' name='idProduto' value='{{ row[0] }}'>
+                                        <button class="btn btn-toolbar" type='submit'>Incluir</button>
+                                    </td>
+                                </tr>
+                            </form>
+                            {% endfor %}
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h2>Produdos Do Pedido</h2>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Imagem</th>
+                                <th>Nome</th>
+                                <th>Unidade</th>
+                                <th>Quantidade</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if prodPedidos %}
+                            {% for row in prodPedidos %}
+                            <form action="{{ url_for('pedidos.removeproduto') }}" method="POST">
+                                <tr>
+                                    <th> <img src=" {{row[1]}}" alt="" width="100PX" height="100PX"></th>
+                                    <td> {{ row[2] }}</td>
+                                    <td> {{ row[3] }}</td>
+                                    <td> {{ row[4] }}   <input value="{{ row[4] }}" type="hidden" name="quantidade" id="quantidade"> </td>
+                                    <td>
+                                        <input type='hidden' value="{{ IdPedido }}" name="IdPedido" id="IdPedido">
+                                        <input type='hidden' name='idProduto' value='{{ row[0] }}'>
+                                        <button class="btn btn-toolbar" type='submit'>Remover</button>
+                                    </td>
+                                </tr>
+                            </form>
+                            {% endfor %}
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

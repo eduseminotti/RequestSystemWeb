@@ -1,0 +1,79 @@
+{% extends "modelo.html" %}
+{% block title %}Pedidos{% endblock %}
+{% block content %}
+
+<script>
+    function confirmExclusao() {
+
+        debugger
+        if (confirm("Tem certeza que deseja excluir?")) {
+            debugger
+            return true;
+        }
+    }
+</script>
+<br>
+<div class="container">
+    <form method="post">
+        <h2><button style="width: 160px" type="button" class="btn btn-primary"
+                onclick="window.location.href='/pedidos/NovoPedido'">Novo
+                Pedido</button></h2>
+    </form>
+
+    <div class="row">
+        <div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h2>Listagem de Pedidos</h2>
+                    <hr />
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Codigo</th>
+                                <th>Cliente Solicitante</th>
+                                <th>Quantidade de itens</th>
+                                <th>Data da solicitação</th>
+                                <th>Editar</th>
+                                <th>Excluir</th>
+                                <th>Ver</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if result %}
+                            {% for row in result %}
+                            <tr>
+                                <th> {{ row[0] }}</th>
+                                <td> {{ row[1] }}</td>
+                                <td> {{ row[2] }}</td>
+                                <td> {{ row[4] }}</td>
+
+                                <td>
+                                    <form action="{{ url_for('pedidos.editPedido') }}" method="POST">
+                                        <input type='hidden' name='id' value='{{ row[0] }}'>
+                                        <button class="btn btn-toolbar" type='submit' name='deleteuser'>Editar</button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="{{ url_for('pedidos.DeletePedido') }}" method="POST">
+                                        <input type='hidden' name='id' value='{{ row[0] }}'>
+                                        <button class="btn btn-toolbar" type='submit' name='deleteuser'>Excluir</button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="{{ url_for('pedidos.Verpedido') }}" method="POST">
+                                        <input type='hidden' name='id' value='{{ row[0] }}'>
+                                        <button class="btn btn-toolbar" type='submit' name='VerPedido'>Ver</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
