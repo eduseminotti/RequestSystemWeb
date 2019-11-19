@@ -1,5 +1,7 @@
 #coding: utf-8
-from flask import Blueprint, render_template, request, redirect, url_for, session
+from base64 import b64encode
+
+from flask import Blueprint, render_template, request, redirect, url_for, session, make_response, flash
 from mod_login.login import validaSessao
 from PedidosDb import Pedidos
 from ProdutosDB import Produtos
@@ -112,11 +114,23 @@ def Verpedido():
     cliente = pedidos.selectclientePedido()
     prodpedidos = pedidos.selectProdutosDoPedido(pedidos.id)
 
-    return render_template('pedidos_view.html',  cliente=cliente, IdPedido=pedidos.id,
-                           prodPedidos=prodpedidos)
+    
+
+    ren = render_template('pedidos_view.html', cliente=cliente, IdPedido=pedidos.id, prodPedidos=prodpedidos)
+    pdf = pdfkit.from_string(ren, False)
+    response = make_response(pdf)
+    response.headers['Content-Type'] = 'application/pdf'
+    response.headers['Content-Disposition'] = 'attachement; filename=relatorio-pedido.pdf'
+    return response
+
+
+    #return render_template('pedidos_view.html', cliente=cliente, IdPedido=pedidos.id, prodPedidos=prodpedidos)
+
 
 
 @bp_pedidos.route('/pdfpedido')
 def pdfpedido():
 
-    pdfkit.from_file('test.html', 'out.pdf')
+    return None
+
+

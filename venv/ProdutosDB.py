@@ -91,7 +91,7 @@ class Produtos(object):
         try:
 
             c=banco.conexao.cursor()
-            c.execute("update Produtos set  quantidade =  quantidade - %s where id = %s", (quantidade, id))
+            c.execute("update  Produtos set  quantidade =  quantidade - %s where id = %s", (quantidade, id))
             banco.conexao.commit()
             c.close()
 
