@@ -15,7 +15,7 @@
 
             <div class="form-group col-md-4">
                 <label for="Nome do produto">Nome</label>
-                <input type="text" name="Nome" value=" {{ row[1] }} " class="form-control">
+                <input type="text" name="Nome" value="{{ row[1] }} " class="form-control">
             </div>
             <div class="form-group col-md-4">
                 <label for="Tipo de Unidade">Endereço</label>
@@ -23,19 +23,19 @@
             </div>
             <div class="form-group col-md-4">
                 <label for="">email</label>
-                <input type="email" name="Email" class="form-control" value=" {{ row[3] }} "id=" Email" placeholder="">
+                <input type="email" name="Email" class="form-control" value="{{ row[3] }} "id=" Email" placeholder="">
             </div>
             <div class="form-group col-md-4">
                 <label for="Tipo de Unidade">Login</label>
-                <input type="text" name="Login" class="form-control" value=" {{ row[4] }} "id=" Login">
+                <input type="text" name="Login" class="form-control" value="{{ row[4] }} "id=" Login">
             </div>
             <div class="form-group col-md-4">
                 <label for="Tipo de Unidade">Senha</label>
-                <input type="password" name="Senha" class="form-control" value=" {{ row[5] }}" id=" Senha">
+                <input type="password" name="Senha" class="form-control" value="{{ row[5] }}" id=" Senha">
             </div>
             <div class="form-group col-md-4">
                 <label for="Tipo de Unidade">Grupo</label>
-                <input type="text" name="Grupo" class="form-control" value=" {{ row[6] }}" id=" Grupo">
+                <input type="number" name="Grupo" class="form-control" value="{{ row[6] }}" id=" Grupo">
             </div>
         </div>
         <button type="submit" class="btn btn-primary">Gravar</button>

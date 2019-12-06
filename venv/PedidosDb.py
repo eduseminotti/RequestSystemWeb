@@ -10,13 +10,27 @@ class Pedidos(object):
         self.Cliente = Cliente
         self.quantidade = quantidade
 
-    def selecALLPedidos(self):
+    def selecALLPedidoscliente(self):
         banco = Banco()
         try:
             c = banco.conexao.cursor()
             c.execute("SELECT Id ,cliente = (select nome from tb_clientes where id = pedido.clientId)," +
                       "quantidade = (select COUNT(*) from ItensPedido where pedidosId = pedido.id) ,descricao,"+
-                      "cast (insertdate as date)  FROM [Pedidos] as pedido")
+                      "cast (insertdate as date)  FROM [Pedidos] as pedido where pedido.clientId = %s", (self.id))
+            result = c.fetchall()
+            c.close()
+            return result
+        except:
+            return "Ocorreu um erro na busca dos pedidos"
+
+
+    def selecALLPedidosadmin(self):
+        banco = Banco()
+        try:
+            c = banco.conexao.cursor()
+            c.execute("SELECT Id ,cliente = (select nome from tb_clientes where id = pedido.clientId)," +
+                      "quantidade = (select COUNT(*) from ItensPedido where pedidosId = pedido.id) ,descricao,"+
+                      "cast (insertdate as date)  FROM [Pedidos] as pedido ")
             result = c.fetchall()
             c.close()
             return result

@@ -1,5 +1,6 @@
 from BancoDB import Banco
 
+
 class Produtos(object):
 
     def __init__(self, id=0, nome="",unidade="", quantidade="", image=""):

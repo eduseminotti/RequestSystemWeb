@@ -2,22 +2,32 @@
 from flask import Blueprint, render_template , request , redirect , url_for
 from mod_login.login import validaSessao
 from ClientesDB import Clientes
+from ValidaUserDB import ValidaUser
 
 bp_clientes = Blueprint('clientes', __name__, url_prefix='/clientes', template_folder='templates')
 
 @bp_clientes.route("/")
 @validaSessao
 def index():
+    validaUser = ValidaUser()
+    valida = validaUser.validapermissao()
 
-    clientes = Clientes()
+    if valida == True:
+        clientes = Clientes()
 
-    result = clientes.selecALLClients()
+        result = clientes.selecALLClients()
 
-    return render_template('clientes_index.html', result=result)
-    
+        return render_template('clientes_index.html', result=result)
+
+    else:
+        return redirect(url_for('pedidos.index', result=exec))
+
 @bp_clientes.route("/clientes_new")
 @validaSessao
 def clientes_new():
+
+
+
     return render_template('clientes_new.html')
 
 @bp_clientes.route("/EditClient", methods=['POST'])
@@ -75,4 +85,6 @@ def DeleteClient():
 
     exec = clientes.deleteClient()
 
-    return redirect(url_for('clientes.index', result=exec))     
+    return redirect(url_for('clientes.index', result=exec))
+
+

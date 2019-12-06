@@ -1,3 +1,4 @@
+from flask import session
 from BancoDB import Banco
 
 class ValidaUser(object):
@@ -20,3 +21,12 @@ class ValidaUser(object):
             return result 
         except:
             return "Ocorreu um erro na busca do usuário"
+
+
+    def validapermissao(self):
+        grupo = session['grupo']
+
+        if grupo == 1 :
+            return True
+        else:
+            return False

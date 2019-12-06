@@ -1,5 +1,6 @@
 #coding: utf-8
 from base64 import b64encode
+from builtins import set
 
 from flask import Blueprint, render_template, request, redirect, url_for, session, make_response, flash
 from mod_login.login import validaSessao
@@ -18,7 +19,13 @@ def index():
 
     pedidos = Pedidos()
 
-    result = pedidos.selecALLPedidos()
+    grupo = session['grupo']
+
+    if grupo == 1:
+        result = pedidos.selecALLPedidosadmin() 
+    else:
+        pedidos.id = session['id']
+        result = pedidos.selecALLPedidoscliente()
 
     return render_template('pedidos_index.html', result=result)
 

@@ -61,8 +61,10 @@
                             <div class="classynav">
                                 <ul>
                                     <li><a href="{{ url_for('pedidos.index') }}">Pedidos</a></li>
+                                    {% if session['grupo'] == 1 %}
                                     <li><a href="{{ url_for('clientes.index') }}">Clientes</a></li>
                                     <li><a href="{{ url_for('produtos.index') }}">Produtos</a></li>
+                                    {%endif%}
                                     <li><a href="{{ url_for('login.btnlogout') }}">sair </a></li>
                                 </ul>
                                 <div class="search-form" ; hidden=true>
